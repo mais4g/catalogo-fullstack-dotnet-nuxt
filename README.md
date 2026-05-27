@@ -11,11 +11,7 @@ Aplicação full stack para gerenciamento de catálogo comercial com CRUD reativ
 - **Banco:** SQL Server 2022 (Docker)
 - **Orquestração:** Docker Compose
 
-## Status
-
-🚧 Em desenvolvimento. Acompanhe o progresso em [`PLAN.md`](./PLAN.md).
-
-## Estrutura prevista
+## Estrutura
 
 ```
 /
@@ -24,15 +20,10 @@ Aplicação full stack para gerenciamento de catálogo comercial com CRUD reativ
 │   ├── src/Catalogo.Api/
 │   └── tests/Catalogo.Api.Tests/
 ├── frontend/
-├── docs/screenshots/
+├── docs/
 ├── docker-compose.yml
-├── PLAN.md
 └── README.md
 ```
-
-## Quickstart
-
-> Será preenchido conforme o desenvolvimento avança (ver Day 8 no [`PLAN.md`](./PLAN.md)).
 
 ---
 
