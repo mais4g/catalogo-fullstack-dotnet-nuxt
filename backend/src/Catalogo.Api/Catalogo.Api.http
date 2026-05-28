@@ -1,5 +1,9 @@
 @base = http://localhost:5000
 
+# ============================================================
+# CATEGORIAS
+# ============================================================
+
 ###
 # Listar todas as categorias
 GET {{base}}/api/categorias
@@ -65,3 +69,88 @@ DELETE {{base}}/api/categorias/999
 # Excluir categoria com produtos vinculados -> 409
 # (testar após criar produto vinculado a uma categoria)
 DELETE {{base}}/api/categorias/2
+
+
+# ============================================================
+# PRODUTOS
+# ============================================================
+
+###
+# Listar todos os produtos (com objeto Categoria aninhado)
+GET {{base}}/api/produtos
+
+###
+# Criar produto válido
+POST {{base}}/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "Notebook Dell Inspiron",
+  "descricao": "Notebook 15 polegadas, 16GB RAM",
+  "preco": 4599.90,
+  "categoriaId": 1
+}
+
+###
+# Criar produto inválido (nome curto) -> 400
+POST {{base}}/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "PC",
+  "preco": 100.00,
+  "categoriaId": 1
+}
+
+###
+# Criar produto inválido (preço zero) -> 400
+POST {{base}}/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "Produto sem preço",
+  "preco": 0,
+  "categoriaId": 1
+}
+
+###
+# Criar produto com categoria inexistente -> 400
+POST {{base}}/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "Produto órfão",
+  "preco": 50.00,
+  "categoriaId": 999
+}
+
+###
+# Atualizar produto existente
+PUT {{base}}/api/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Notebook Dell Inspiron 15",
+  "descricao": "Atualizado",
+  "preco": 4799.90,
+  "categoriaId": 1
+}
+
+###
+# Atualizar produto inexistente -> 404
+PUT {{base}}/api/produtos/999
+Content-Type: application/json
+
+{
+  "nome": "Inexistente",
+  "preco": 100,
+  "categoriaId": 1
+}
+
+###
+# Excluir produto existente -> 204
+DELETE {{base}}/api/produtos/1
+
+###
+# Excluir produto inexistente -> 404
+DELETE {{base}}/api/produtos/999
