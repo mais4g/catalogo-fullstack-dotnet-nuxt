@@ -4,8 +4,10 @@
 
     <v-app-bar color="primary" :elevation="2" role="banner">
       <v-app-bar-title>
-        <v-icon icon="mdi-package-variant" class="me-2" aria-hidden="true" />
-        Catálogo
+        <NuxtLink to="/" class="text-decoration-none text-white d-flex align-center">
+          <v-icon icon="mdi-package-variant" class="me-2" aria-hidden="true" />
+          Catálogo
+        </NuxtLink>
       </v-app-bar-title>
 
       <template #append>
@@ -35,8 +37,32 @@
         <slot />
       </v-container>
     </v-main>
+
+    <v-snackbar
+      v-model="toast.state.show"
+      :color="toast.state.color"
+      :timeout="4500"
+      location="bottom right"
+      role="alert"
+      aria-live="assertive"
+    >
+      {{ toast.state.message }}
+      <template #actions>
+        <v-btn
+          variant="text"
+          aria-label="Fechar notificação"
+          @click="toast.state.show = false"
+        >
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
+
+<script setup lang="ts">
+const toast = useToast()
+</script>
 
 <style scoped>
 .skip-link {
