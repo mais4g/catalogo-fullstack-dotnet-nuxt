@@ -1,0 +1,67 @@
+@base = http://localhost:5000
+
+###
+# Listar todas as categorias
+GET {{base}}/api/categorias
+
+###
+# Criar nova categoria (válida)
+POST {{base}}/api/categorias
+Content-Type: application/json
+
+{
+  "nome": "Eletrônicos",
+  "descricao": "Aparelhos e dispositivos eletrônicos"
+}
+
+###
+# Criar categoria inválida (nome curto) -> 400
+POST {{base}}/api/categorias
+Content-Type: application/json
+
+{
+  "nome": "abc",
+  "descricao": "Teste de validação"
+}
+
+###
+# Criar categoria inválida (nome nulo) -> 400
+POST {{base}}/api/categorias
+Content-Type: application/json
+
+{
+  "descricao": "Sem nome"
+}
+
+###
+# Atualizar categoria existente
+PUT {{base}}/api/categorias/1
+Content-Type: application/json
+
+{
+  "nome": "Eletrônicos e Informática",
+  "descricao": "Categoria atualizada"
+}
+
+###
+# Atualizar categoria inexistente -> 404
+PUT {{base}}/api/categorias/999
+Content-Type: application/json
+
+{
+  "nome": "Inexistente",
+  "descricao": "Teste"
+}
+
+###
+# Excluir categoria sem produtos -> 204
+DELETE {{base}}/api/categorias/1
+
+###
+# Excluir categoria inexistente -> 404
+DELETE {{base}}/api/categorias/999
+
+###
+# Excluir categoria com produtos vinculados -> 409
+# (testar após criar produto vinculado a uma categoria)
+DELETE {{base}}/api/categorias/2
